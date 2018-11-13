@@ -5,11 +5,15 @@ import ar.edu.itba.ss.utils.other.Point;
 import ar.edu.itba.ss.utils.other.RandomUtils;
 import ar.edu.itba.ss.utils.other.Tuple;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class MovementManager {
 
     private final IOManager ioManager;
     private final GridManager gridManager;
+
+    private int order = 0;
 
     @Inject
     public MovementManager(IOManager ioManager, GridManager gridManager) {
@@ -29,9 +33,11 @@ public class MovementManager {
             int counter = 0;
             double cellSize = ioManager.getConfiguration().getDimensions().getX() / p.getRadius();
             y = 0D + p.getRadius();
+            final double quarter = ioManager.getConfiguration().getDimensions().getX()/4;
 
             do {
-                x = RandomUtils.nextDouble(0D, ioManager.getConfiguration().getDimensions().getX());
+                x = RandomUtils.nextDouble(order*quarter, (order + 1) * quarter);
+
                 p.setPosition(new Point<>(x, y));
 
                 if(!gridManager.isValidParticle(p)) {
@@ -45,9 +51,10 @@ public class MovementManager {
                 }
             } while (counter < ioManager.getConfiguration().getInsertionRetries());
 
-            if(!gridManager.isValidParticle(p)) {
-                //TODO: What do we do?
-            }
+            order++;
+            if(order == 4)
+                order = 0;
+
 
             modified = true;
             p.setVelocity(new Point<>(0D, 0D));

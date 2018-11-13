@@ -27,7 +27,7 @@ public class ForcesManager {
         this.kt = ioManager.getConfiguration().getKt();
         this.kn = ioManager.getConfiguration().getKn();
         this.gamma = ioManager.getConfiguration().getGamma();
-        this.mu = ioManager.getMu();
+        this.mu = ioManager.getConfiguration().getMu();
         this.gravity = ioManager.getConfiguration().getGravity();
         this.gridManager = gridManager;
         this.presionConstant = 2 * Math.PI * ioManager.getConfiguration().getInteractionRadius();
@@ -59,7 +59,7 @@ public class ForcesManager {
                 double fT = calculateFTForce(relativeVelocity, fN, eX, eY);
                 forceX += fN * eX + fT * -eY;
                 forceY += fN * eY + fT * eX;
-                fNTotal += fN;
+                fNTotal += Math.abs(fN);
             }
         }
         for (GridManager.WallType w : GridManager.WallType.values()) {
@@ -76,10 +76,10 @@ public class ForcesManager {
                 double fT = calculateFTForce(relativeVelocity, fN, eX, eY);
                 forceX += fN * eX + fT * -eY;
                 forceY += fN * eY + fT * eX;
-                fNTotal += fN;
+                fNTotal += Math.abs(fN);
             }
         }
-        return new Tuple<>(Math.abs(fNTotal) / this.presionConstant, new Point<>(forceX, forceY));
+        return new Tuple<>(fNTotal / this.presionConstant, new Point<>(forceX, forceY));
     }
 
     private double calculateEy(final Point<Double> position, final Point<Double> position2) {

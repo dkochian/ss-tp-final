@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Singleton;
 import java.io.*;
-import java.math.BigDecimal;
 import java.util.Objects;
 
 @Singleton
@@ -21,13 +20,10 @@ public class IOManager {
     private Configuration configuration = null;
     private InputData inputData = null;
 
-    private BigDecimal mu;
-
     public Configuration getConfiguration() {
         if (configuration == null) {
             try {
                 logger.debug("Loading configuration");
-                this.mu = new BigDecimal(0.9);
                 configuration = read(FILENAME, Configuration.class);
             } catch (IOException e) {
                 try {
@@ -105,17 +101,5 @@ public class IOManager {
 
     public int inputDay(final String path) {
         return (int) Math.floor(Objects.requireNonNull(new File(path).listFiles((dir, name) -> name.endsWith(".json"))).length / 2.0);
-    }
-
-    public double getMu(){
-        return this.mu.doubleValue();
-    }
-
-    public void sumMu(){
-        this.mu = this.mu.add(new BigDecimal(0.2));
-    }
-
-    public boolean topMu(){
-        return mu.compareTo(new BigDecimal(1.0)) < 0;
     }
 }

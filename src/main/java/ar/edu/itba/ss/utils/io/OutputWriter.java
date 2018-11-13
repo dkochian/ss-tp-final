@@ -65,7 +65,7 @@ public class OutputWriter {
     }
 
     public void writeKineticEnergy(final double energy, final double elapsed) throws IOException {
-        final String path = ioManager.getConfiguration().getOutputDirectory() + "/kineticEnergy mu = " + ioManager.getMu() + ".tsv";
+        final String path = ioManager.getConfiguration().getOutputDirectory() + "/kineticEnergy.tsv";
 
         try (final PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path, true)))) {
             printWriter

@@ -77,9 +77,9 @@ public class SimulationManager {
             if (Double.compare(elapsed, counter * ioManager.getConfiguration().getCompress()) >= 0) {
                 counter++;
                 try {
-                    //outputWriter.write();
+                    outputWriter.write();
                     outputWriter.writeKineticEnergy(calculateKineticEnergy(), elapsed);
-                    //outputWriter.writeParticlesOverOpening(calculateParticlesOverOpening());
+                    outputWriter.writeParticlesOverOpening(calculateParticlesOverOpening());
 
                 } catch (IOException e) {
                     e.printStackTrace();
