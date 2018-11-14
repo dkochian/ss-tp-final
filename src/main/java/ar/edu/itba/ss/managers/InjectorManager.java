@@ -4,6 +4,8 @@ import ar.edu.itba.ss.utils.other.InjectorModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+import javax.inject.Inject;
+
 public class InjectorManager {
 
     private static final Injector injector = Guice.createInjector(new InjectorModule());

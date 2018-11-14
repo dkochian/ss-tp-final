@@ -27,6 +27,7 @@ public class Configuration {
     private final Range<Double> particleMass;
 
     //Simulation
+    private final String schema;
     private final double dt;
     private final double duration;
     private final double interactionRadius;
@@ -73,7 +74,8 @@ public class Configuration {
         gravity = 9.8;
 
         //Simulation
-        dt = 5.1E-5;
+        schema = "Gear";
+        dt = 1E-6;
         duration = 5.0;
         interactionRadius = 0.03;
         insertionRetries = 10;
@@ -82,7 +84,7 @@ public class Configuration {
         compress = 1.0E-2;
     }
 
-    public Configuration(String outputDirectory, String outputSimulationFile, String inputDirectory, String inputFilename, boolean generateInput, int particleAmount, int maxIterations, double factor, Point<Double> dimensions, Tuple<Double, Range<Double>> opening, Point<Range<Double>> particleVelocity, Point<Range<Double>> particleAcceleration, Range<Double> particleRadius, Range<Double> particleMass, double dt, double duration, double interactionRadius, int insertionRetries, double kn, double kt, double mu, double gamma, double tolerance, double gravity, double compress) {
+    public Configuration(String outputDirectory, String outputSimulationFile, String inputDirectory, String inputFilename, boolean generateInput, int particleAmount, int maxIterations, double factor, Point<Double> dimensions, Tuple<Double, Range<Double>> opening, Point<Range<Double>> particleVelocity, Point<Range<Double>> particleAcceleration, Range<Double> particleRadius, Range<Double> particleMass, String schema, double dt, double duration, double interactionRadius, int insertionRetries, double kn, double kt, double mu, double gamma, double tolerance, double gravity, double compress) {
         this.outputDirectory = outputDirectory;
         this.outputSimulationFile = outputSimulationFile;
         this.inputDirectory = inputDirectory;
@@ -97,6 +99,7 @@ public class Configuration {
         this.particleAcceleration = particleAcceleration;
         this.particleRadius = particleRadius;
         this.particleMass = particleMass;
+        this.schema = schema;
         this.dt = dt;
         this.duration = duration;
         this.interactionRadius = interactionRadius;
@@ -164,6 +167,10 @@ public class Configuration {
 
     public Range<Double> getParticleMass() {
         return particleMass;
+    }
+
+    public String getSchema() {
+        return schema;
     }
 
     public double getDt() {

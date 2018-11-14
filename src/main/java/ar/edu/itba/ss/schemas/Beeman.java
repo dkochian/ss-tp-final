@@ -46,7 +46,7 @@ public class Beeman extends Schema {
 
     private void updateParticle(final Particle particle, final double dt) {
         final Point<Double> particlePosition = particle.getPosition();
-        Point<Double> particleVelocity = particle.getVelocity();
+        final Point<Double> particleVelocity = particle.getVelocity();
 
         double xActualAcceleration = particle.getAcceleration().getX();
         double yActualAcceleration = particle.getAcceleration().getY();

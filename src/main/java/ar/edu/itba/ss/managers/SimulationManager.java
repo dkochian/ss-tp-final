@@ -56,7 +56,10 @@ public class SimulationManager {
             particleManager.addParticle(new Particle(p.getId(), p.getPosition(), p.getVelocity(), p.getAcceleration(),
                     p.getMass(), p.getRadius()));
 
-        schema.init();
+        if (ioManager.getConfiguration().getSchema().equals("Gear"))
+            schema.gearInit(ioManager.getConfiguration().getGamma(), ioManager.getConfiguration().getKt());
+        else
+            schema.init();
 
         double counter = 1;
         long prev = System.currentTimeMillis();
